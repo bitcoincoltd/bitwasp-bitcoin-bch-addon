@@ -2,6 +2,7 @@
 
 namespace Btccom\BitcoinCash\Address;
 
+use BitWasp\Bitcoin\Address\Address;
 use BitWasp\Bitcoin\Address\Base58Address;
 use BitWasp\Bitcoin\Address\Base58AddressInterface;
 use BitWasp\Bitcoin\Address\BaseAddressCreator;
@@ -85,7 +86,7 @@ class AddressCreator extends BaseAddressCreator
      * @return Base58AddressInterface|CashAddress
      * @throws UnrecognizedAddressException
      */
-    public function fromString($strAddress, NetworkInterface $network = null)
+    public function fromString($strAddress, NetworkInterface $network = null) : Address
     {
         $network = $network ?: Bitcoin::getNetwork();
 
@@ -114,7 +115,7 @@ class AddressCreator extends BaseAddressCreator
      * @return Base58AddressInterface|CashAddress
      * @throws UnrecognizedScriptForAddressException
      */
-    public function fromOutputScript(ScriptInterface $script)
+    public function fromOutputScript(ScriptInterface $script): Address
     {
         $decode = (new OutputClassifier())->decode($script);
 
